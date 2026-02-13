@@ -2,7 +2,21 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import {
+  HomeIcon,
+  ArchiveBoxIcon,
+  UserIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
+
+import {
+  FaWhatsapp,
+  FaInstagram,
+  FaFacebookF,
+  FaLinkedinIn,
+} from "react-icons/fa";
+
 import {
   Car,
   Building2,
@@ -41,33 +55,73 @@ export default function Page() {
   return (
     <main className="bg-zinc-100 text-zinc-800 ">
       {/* SUB MENU */}
-      <header className="w-full bg-black shadow-sm border-b border-gray-800">
+      <header className="w-full bg-[#051c21] shadow-sm border-b border-[#07333b]">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           {/* Logo */}
           <div className="text-lg font-bold text-white">HB Seguros</div>
 
           {/* Navegação */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white">
-            <a href="#" className="hover:text-gray-600 transition">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white animate-spin  ">
+            <a
+              href="#"
+              className="px-4 py-2 rounded-lg bg-[#051c21] text-white transition-all duration-200 ease-in-out hover:bg-gray-800 hover:scale-105 active:scale-95"
+            >
               Início
             </a>
-            <a href="#" className="hover:text-gray-600 transition">
+            <a
+              href="#"
+              className="px-4 py-2 rounded-lg bg-[#051c21] text-white transition-all duration-200 ease-in-out hover:bg-gray-800 hover:scale-105 active:scale-95"
+            >
               Soluções
             </a>
-            <a href="#" className="hover:text-gray-600 transition">
+            <a
+              href="#"
+              className="px-4 py-2 rounded-lg bg-[#051c21] text-white transition-all duration-200 ease-in-out hover:bg-gray-800 hover:scale-105 active:scale-95"
+            >
               Sobre
             </a>
-            <a href="#" className="hover:text-gray-600 transition">
+            <a
+              href="#"
+              className="px-4 py-2 rounded-lg bg-[#051c21] text-white transition-all duration-200 ease-in-out hover:bg-gray-800 hover:scale-105 active:scale-95"
+            >
               Contato
             </a>
           </nav>
 
-          {/* Botão */}
-          <div className="hidden md:block">
-            <button className="bg-green-600 hover:bg-green-700 transition px-5 py-2 rounded-lg text-xs font-semibold text-white shadow">
-              Falar no WhatsApp
-            </button>
-          </div>
+          {/* BOTTOM NAVIGATION */}
+          <nav className="hidden md:flex items-center gap-6 text-white">
+            {/* WhatsApp */}
+            <a
+              href="#"
+              className="group p-3 rounded-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 hover:bg-green-500/10"
+            >
+              <FaWhatsapp className="h-5 w-5 transition-all duration-300 group-hover:text-green-500 group-hover:drop-shadow-[0_0_8px_#22c55e]" />
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="#"
+              className="group p-3 rounded-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 hover:bg-pink-500/10"
+            >
+              <FaInstagram className="h-5 w-5 transition-all duration-300 group-hover:text-pink-500 group-hover:drop-shadow-[0_0_8px_#ec4899]" />
+            </a>
+
+            {/* Facebook */}
+            <a
+              href="#"
+              className="group p-3 rounded-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-600/10"
+            >
+              <FaFacebookF className="h-5 w-5 transition-all duration-300 group-hover:text-blue-600 group-hover:drop-shadow-[0_0_8px_#2563eb]" />
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="#"
+              className="group p-3 rounded-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-110 hover:bg-blue-700/10"
+            >
+              <FaLinkedinIn className="h-5 w-5 transition-all duration-300 group-hover:text-blue-700 group-hover:drop-shadow-[0_0_8px_#1d4ed8]" />
+            </a>
+          </nav>
 
           {/* Menu Mobile */}
           <div className="md:hidden">
@@ -115,11 +169,11 @@ export default function Page() {
           </p>
 
           <div className="mt-8 flex gap-4 flex-wrap justify-center">
-            <button className="bg-gray-600 hover:bg-gray-800 transition px-6 py-3 rounded-xl text-sm font-semibold shadow-md">
+            <button className="bg-[#051c21]/70 hover:bg-[#051c21]/40 transition px-6 py-3 rounded-xl text-sm font-semibold border border-white/30">
               Fale Conosco
             </button>
             <button className="bg-white/10 hover:bg-white/20 transition px-6 py-3 rounded-xl text-sm font-semibold border border-white/30">
-              Simular Agora
+              Conheça Seguros
             </button>
           </div>
         </motion.div>
@@ -193,7 +247,7 @@ export default function Page() {
 
                 {/* BORDA ANIMADA */}
                 <motion.div
-                  whileHover={{ borderColor: "gray" }}
+                  whileHover={{ borderColor: "#07333b" }}
                   transition={{ duration: 0.3 }}
                   className="absolute inset-0 border-2 border-transparent rounded-xl"
                 ></motion.div>
@@ -220,7 +274,7 @@ export default function Page() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto text-zinc-600 mb-14 px-6"
+          className="max-w-3xl mx-auto text-#0a2978-600 mb-14 px-6"
         >
           Oferecemos seguros para automóveis, vida, residenciais e empresariais,
           além de consórcios e soluções financeiras. Nossa equipe está pronta
@@ -280,8 +334,8 @@ export default function Page() {
                        transition-colors duration-300"
                 >
                   <item.icon
-                    className="w-8 h-8 text-zinc-700 
-                         group-hover:text-black
+                    className="w-8 h-8 text-[#051c21] 
+                         group-hover:text-[#0c3c47]
                          transition-colors duration-300"
                   />
                 </div>
@@ -433,7 +487,7 @@ export default function Page() {
                   transition={{ type: "spring", stiffness: 250 }}
                   className="w-16 h-16 flex items-center justify-center 
                        rounded-full border border-zinc-300 
-                       text-lg font-semibold text-zinc-700 mb-6 bg-white"
+                       text-lg font-semibold text-[#051c21] mb-6 bg-white"
                 >
                   {item.number}
                 </motion.div>
@@ -444,7 +498,7 @@ export default function Page() {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.4, delay: index * 0.2 + 0.2 }}
                   viewport={{ once: true }}
-                  className="text-sm font-semibold text-zinc-800 mb-2"
+                  className="text-sm font-semibold text[#051c21] mb-2"
                 >
                   {item.title}
                 </motion.h3>
@@ -469,7 +523,7 @@ export default function Page() {
                     transition={{ duration: 0.4, delay: index * 0.2 + 0.4 }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.05 }}
-                    className="text-blue-600 text-sm mt-2 hover:underline"
+                    className="text-[#051c21] text-sm mt-2 hover:underline"
                   >
                     {item.link}
                   </motion.a>
@@ -513,7 +567,7 @@ export default function Page() {
                 transition={{ type: "spring", stiffness: 250 }}
                 className="p-5 bg-zinc-100 rounded-2xl shadow-sm hover:shadow-md transition"
               >
-                <item.icon className="w-8 h-8 text-black" />
+                <item.icon className="w-8 h-8 text-[#051c21]" />
               </motion.div>
 
               <motion.span
@@ -531,19 +585,19 @@ export default function Page() {
       </section>
 
       {/* CTA FINAL */}
-      <section className="py-20 bg-zinc-900 text-center text-white">
+      <section className="py-20 bg-linear-to-r from-[#0c5461] to-[#07333b] text-center text-white">
         <h2 className="text-3xl font-bold">Pronto para proteger seu futuro?</h2>
         <p className="mt-4 text-zinc-400">
           Fale com um especialista e receba uma proposta personalizada.
         </p>
 
-        <button className="mt-8 bg-gray-600 hover:bg-gray-700 transition px-8 py-3 rounded-xl text-sm font-semibold shadow-lg">
+        <button className="mt-8 bg-linear-to-r from-[#7cdbde] to-blue-500 hover:bg-[#169fb8] transition px-8 py-3 rounded-xl text-sm font-semibold shadow-lg">
           Solicitar Cotação
         </button>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-zinc-950 text-zinc-300 pt-16 pb-8">
+      <footer className="bg-[#07333b] text-zinc-300 pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-6">
           {/* GRID PRINCIPAL */}
           <div className="grid md:grid-cols-3 gap-12 border-b border-zinc-800 pb-12">
@@ -561,7 +615,6 @@ export default function Page() {
                 <li>✉ contato@hb10seguros.com.br</li>
               </ul>
             </div>
-
 
             {/* REDES SOCIAIS */}
             <div>
