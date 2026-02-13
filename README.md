@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+---
+
+# 🛡️ Site de Seguros
+
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-ff9800?style=for-the-badge)
+
+Aplicação web desenvolvida com **Next.js** para simulação e apresentação de planos de seguros.
+Projeto focado em arquitetura moderna, componentização e boas práticas de desenvolvimento Front-End.
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+* Next.js
+* React
+* TypeScript
+* Node.js
+* CSS / Tailwind CSS
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+Site-de-Seguros/
+│
+├── app/              # Páginas e rotas da aplicação
+├── components/       # Componentes reutilizáveis
+├── public/           # Imagens, ícones e arquivos estáticos
+├── styles/           # Estilos globais
+├── package.json      # Dependências e scripts
+└── README.md
+```
+
+---
+
+## ⚙️ Como Rodar o Projeto
+
+### 1️⃣ Clone o repositório
+
+```bash
+git clone https://github.com/sychr12/Site-de-Seguros.git
+cd Site-de-Seguros
+```
+
+### 2️⃣ Instale as dependências
+
+```bash
+npm install
+```
+
+ou
+
+```bash
+yarn install
+```
+
+### 3️⃣ Execute em modo de desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação estará disponível em:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏗️ Build para Produção
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🎯 Objetivo do Projeto
 
-## Deploy on Vercel
+* Praticar desenvolvimento com Next.js
+* Criar interface moderna para site de seguros
+* Aplicar boas práticas de organização de código
+* Estruturar componentes reutilizáveis
+* Evoluir para integração com APIs futuras
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📌 Melhorias Futuras
+
+* Integração com API de cálculo de seguros
+* Sistema de autenticação
+* Painel administrativo
+* Integração com banco de dados
+* Deploy automatizado
+
+---
+
+## 👨‍💻 Autor
+
+Luiz
+GitHub: [https://github.com/sychr12](https://github.com/sychr12)
+
+---

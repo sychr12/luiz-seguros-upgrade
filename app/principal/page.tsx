@@ -39,25 +39,25 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="bg-zinc-100 text-zinc-800">
+    <main className="bg-zinc-100 text-zinc-800 ">
       {/* SUB MENU */}
-      <header className="w-full bg-white shadow-sm border-b border-zinc-200">
+      <header className="w-full bg-black shadow-sm border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           {/* Logo */}
-          <div className="text-lg font-bold text-zinc-800">HB Seguros</div>
+          <div className="text-lg font-bold text-white">HB Seguros</div>
 
           {/* Navegação */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
-            <a href="#" className="hover:text-green-600 transition">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white">
+            <a href="#" className="hover:text-gray-600 transition">
               Início
             </a>
-            <a href="#" className="hover:text-green-600 transition">
+            <a href="#" className="hover:text-gray-600 transition">
               Soluções
             </a>
-            <a href="#" className="hover:text-green-600 transition">
+            <a href="#" className="hover:text-gray-600 transition">
               Sobre
             </a>
-            <a href="#" className="hover:text-green-600 transition">
+            <a href="#" className="hover:text-gray-600 transition">
               Contato
             </a>
           </nav>
@@ -115,7 +115,7 @@ export default function Page() {
           </p>
 
           <div className="mt-8 flex gap-4 flex-wrap justify-center">
-            <button className="bg-green-600 hover:bg-green-700 transition px-6 py-3 rounded-xl text-sm font-semibold shadow-md">
+            <button className="bg-gray-600 hover:bg-gray-800 transition px-6 py-3 rounded-xl text-sm font-semibold shadow-md">
               Fale Conosco
             </button>
             <button className="bg-white/10 hover:bg-white/20 transition px-6 py-3 rounded-xl text-sm font-semibold border border-white/30">
@@ -193,7 +193,7 @@ export default function Page() {
 
                 {/* BORDA ANIMADA */}
                 <motion.div
-                  whileHover={{ borderColor: "#22c55e" }}
+                  whileHover={{ borderColor: "gray" }}
                   transition={{ duration: 0.3 }}
                   className="absolute inset-0 border-2 border-transparent rounded-xl"
                 ></motion.div>
@@ -276,12 +276,12 @@ export default function Page() {
               >
                 <div
                   className="p-4 bg-zinc-100 rounded-xl 
-                       group-hover:bg-green-50 
+                       group-hover:bg-gray-100 
                        transition-colors duration-300"
                 >
                   <item.icon
                     className="w-8 h-8 text-zinc-700 
-                         group-hover:text-green-600 
+                         group-hover:text-black
                          transition-colors duration-300"
                   />
                 </div>
@@ -513,7 +513,7 @@ export default function Page() {
                 transition={{ type: "spring", stiffness: 250 }}
                 className="p-5 bg-zinc-100 rounded-2xl shadow-sm hover:shadow-md transition"
               >
-                <item.icon className="w-8 h-8 text-green-600" />
+                <item.icon className="w-8 h-8 text-black" />
               </motion.div>
 
               <motion.span
@@ -537,7 +537,7 @@ export default function Page() {
           Fale com um especialista e receba uma proposta personalizada.
         </p>
 
-        <button className="mt-8 bg-green-600 hover:bg-green-700 transition px-8 py-3 rounded-xl text-sm font-semibold shadow-lg">
+        <button className="mt-8 bg-gray-600 hover:bg-gray-700 transition px-8 py-3 rounded-xl text-sm font-semibold shadow-lg">
           Solicitar Cotação
         </button>
       </section>
@@ -554,15 +554,15 @@ export default function Page() {
               </h3>
 
               <ul className="space-y-2 text-sm text-zinc-400">
-                <li>📍 Rua Ramos Ferreira, 560 - Centro</li>
-                <li>📍 69010-120 - Manaus/AM</li>
+                <li>🏨 Rua Ramos Ferreira, 560 - Centro</li>
+                <li>🗺️ 69010-120 - Manaus/AM</li>
                 <li>📞 (92) 98181-3103</li>
                 <li>🕒 Seg à Sex das 08h30 às 16h00</li>
                 <li>✉ contato@hb10seguros.com.br</li>
               </ul>
             </div>
 
-            {/* REDES SOCIAIS */}
+
             {/* REDES SOCIAIS */}
             <div>
               <h3 className="text-white font-semibold mb-4">Redes Sociais</h3>
@@ -608,27 +608,27 @@ export default function Page() {
               <h3 className="text-white font-semibold mb-4">Links Rápidos</h3>
 
               <div className="grid grid-cols-2 gap-3 text-sm">
-                <a href="#" className="hover:text-green-500 transition">
+                <a href="#" className="hover:text-gray-500 transition">
                   Ligar Agora
                 </a>
 
-                <a href="#" className="hover:text-green-500 transition">
+                <a href="#" className="hover:text-gray-500 transition">
                   Simulação Online
                 </a>
 
-                <a href="#" className="hover:text-green-500 transition">
+                <a href="#" className="hover:text-gray-500 transition">
                   Página Inicial
                 </a>
 
-                <a href="#" className="hover:text-green-500 transition">
+                <a href="#" className="hover:text-gray-500 transition">
                   Seguros e Produtos
                 </a>
 
-                <a href="#" className="hover:text-green-500 transition">
+                <a href="#" className="hover:text-gray-500 transition">
                   Atendimento
                 </a>
 
-                <a href="#" className="hover:text-green-500 transition">
+                <a href="#" className="hover:text-gray-500 transition">
                   Contatos
                 </a>
               </div>
