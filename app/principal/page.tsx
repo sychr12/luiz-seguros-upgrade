@@ -3,6 +3,8 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+
 
 import {
   FaWhatsapp,
@@ -37,11 +39,16 @@ interface NavLink {
 }
 
 interface SocialLinkItem {
-  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  Icon: React.ComponentType<{
+    className?: string;
+    style?: React.CSSProperties;
+  }>;
   href: string;
   color: string;
   hoverColor: string;
 }
+
+
 
 interface HighlightItem {
   title: string;
@@ -53,6 +60,7 @@ interface SolutionItem {
   title: string;
   desc: string;
   gradient: string;
+  href?: string;
 }
 
 interface StepItem {
@@ -89,7 +97,7 @@ const SOCIAL_LINKS: SocialLinkItem[] = [
   { Icon: FaWhatsapp, href: "https://wa.me/5592981813103", color: "green", hoverColor: "#22c55e" },
   { Icon: FaInstagram, href: "#", color: "pink", hoverColor: "#ec4899" },
   { Icon: FaFacebookF, href: "#", color: "blue", hoverColor: "#2563eb" },
-  { Icon: FaLinkedinIn, href: "#", color: "blue", hoverColor: "#1d4ed8" },
+  { Icon: FaLinkedinIn, href: "", color: "blue", hoverColor: "#1d4ed8" },
 ];
 
 const HIGHLIGHTS: HighlightItem[] = [
@@ -119,6 +127,7 @@ const SOLUTIONS: {
   large: [
     {
       icon: Car,
+      href: "/segurosdeveiculo",
       title: "Para Veículos",
       desc: "Carros, Motos, Van e Frota.",
       gradient: "from-cyan-400 to-blue-500",
@@ -271,6 +280,7 @@ interface SocialLinkProps {
 }
 
 interface SolutionCardProps {
+  hraf?: string;
   item: SolutionItem;
   index: number;
   size?: "large" | "medium" | "small";
@@ -288,7 +298,7 @@ interface FloatingButtonProps {
 // Components
 const SocialLink = ({ Icon, href, color, hoverColor }: SocialLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const hoverBgClass = {
     green: 'hover:bg-green-500/20',
     pink: 'hover:bg-pink-500/20',
@@ -309,7 +319,7 @@ const SocialLink = ({ Icon, href, color, hoverColor }: SocialLinkProps) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Icon 
+      <Icon
         className={`h-6 w-6 transition-all duration-300 text-white ${hoverTextClass}`}
         style={{
           filter: isHovered ? `drop-shadow(0 0 8px ${hoverColor})` : 'none',
@@ -329,21 +339,21 @@ const SolutionCard = ({ item, index, size = "medium", delay = 0 }: SolutionCardP
 
   const classes = sizeClasses[size];
 
-  return (
+  const CardContent = (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: delay + index * 0.08 }}
       viewport={{ once: true }}
       whileHover={{ y: -10, scale: size === "large" ? 1.02 : 1.03 }}
-      className={`group bg-white border border-zinc-200 rounded-3xl ${classes.container} shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer`}
+      className={`group bg-white border border-zinc-200 rounded-3xl ${classes.container} shadow-lg hover:shadow-2xl transition-all duration-300`}
     >
       <motion.div
         className="flex justify-center mb-6"
         whileHover={{ rotate: 6, scale: 1.1 }}
         transition={{ type: "spring", stiffness: 200 }}
       >
-        <div className={`p-5 bg-gradient-to-br ${item.gradient} rounded-2xl shadow-md`}>
+        <div className={`p-5 bg-linear-to-br ${item.gradient} rounded-2xl shadow-md`}>
           <item.icon className={`${classes.icon} text-white`} strokeWidth={2} />
         </div>
       </motion.div>
@@ -352,10 +362,23 @@ const SolutionCard = ({ item, index, size = "medium", delay = 0 }: SolutionCardP
         {item.title}
       </h3>
 
-      <p className={`${classes.desc} text-zinc-600`}>{item.desc}</p>
+      <p className={`${classes.desc} text-zinc-600`}>
+        {item.desc}
+      </p>
     </motion.div>
   );
+
+  if (item.href) {
+    return (
+      <Link href={item.href} className="block cursor-pointer">
+        {CardContent}
+      </Link>
+    );
+  }
+
+  return CardContent;
 };
+
 
 const FloatingButton = ({ href, icon, label, bgColor, delay }: FloatingButtonProps) => (
   <motion.div
@@ -459,17 +482,20 @@ export default function Page() {
     <main id="main-content" className="bg-zinc-100 text-zinc-800 text-base md:text-xl lg:text-2xl">
       {/* Skip link for keyboard users */}
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-black focus:px-4 focus:py-2 rounded z-50">Ir para o conteúdo</a>
+
       {/* HEADER */}
-      <header className="w-full bg-[#051c21] shadow-sm border-b border-[#07333b] sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
-          <div className="text-xl md:text-2xl font-bold text-white">HB Seguros</div>
+     <header className="bg-[#051c21] text-white sticky top-0 z-50 shadow-md">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="font-bold text-2xl tracking-wide">
+            HB Seguros
+          </div>
 
           <nav className="hidden md:flex items-center gap-6 text-lg md:text-xl font-medium text-white">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                  className="px-4 py-2 rounded-lg transition-all duration-200 ease-in-out hover:bg-gray-800 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                className="px-4 py-2 rounded-lg transition-all duration-200 ease-in-out hover:bg-gray-800 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
               >
                 {link.label}
               </a>
@@ -509,6 +535,7 @@ export default function Page() {
               <div className="flex items-center justify-between">
                 <div className="text-xl font-bold text-white">HB Seguros</div>
                 <button
+                  ref={closeMenuButtonRef}
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Fechar menu"
                   className="text-white text-2xl p-2 rounded hover:bg-white/10 transition"
@@ -518,9 +545,10 @@ export default function Page() {
               </div>
 
               <div className="flex flex-col mt-2">
-                {NAV_LINKS.map((link) => (
+                {NAV_LINKS.map((link, idx) => (
                   <a
                     key={link.href}
+                    ref={idx === 0 ? firstMobileLinkRef : null}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className="py-3 px-2 rounded text-white text-lg font-medium hover:bg-white/5 transition"
@@ -541,7 +569,7 @@ export default function Page() {
       </AnimatePresence>
 
       {/* HERO */}
-      <section className="relative h-[520px] md:h-[600px] overflow-hidden">
+      <section id="inicio" className="relative h-130 md:h-150 overflow-hidden">
         <AnimatePresence mode="wait">
           {HERO_IMAGES.map((img, index) =>
             index === currentHeroImage ? (
@@ -566,7 +594,7 @@ export default function Page() {
           )}
         </AnimatePresence>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/70" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -619,16 +647,16 @@ export default function Page() {
                 className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer"
               >
                 <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.6 }}>
-                    <Image
-                      src={item.img}
-                      alt={item.title}
-                      width={500}
-                      height={300}
-                      className="w-full h-48 sm:h-56 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                  <Image
+                    src={item.img}
+                    alt={item.title}
+                    width={500}
+                    height={300}
+                    className="w-full h-48 sm:h-56 object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
                 </motion.div>
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40 group-hover:from-black/90 group-hover:to-black/50 transition" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 to-black/40 group-hover:from-black/90 group-hover:to-black/50 transition" />
 
                 <div className="absolute inset-0 flex items-center justify-center">
                   <h3 className="text-white text-2xl md:text-3xl font-bold tracking-wide drop-shadow-lg">
@@ -642,13 +670,16 @@ export default function Page() {
       </section>
 
       {/* SOLUTIONS */}
-      <section id="solucoes" className="py-24 text-center bg-gradient-to-b from-zinc-50 to-white">
+      <section
+        id="solucoes"
+        className="py-24 text-center bg-linear-to-b from-zinc-50 to-white"
+      >
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+          className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
         >
           Conheça nossas soluções
         </motion.h2>
@@ -660,40 +691,62 @@ export default function Page() {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-gray-600 mb-12 px-4 md:px-6 text-base md:text-xl lg:text-2xl leading-relaxed"
         >
-          Conheça todas as soluções que temos disponíveis em nosso site. Oferecemos seguros para automóveis, vida, residenciais e empresariais,
-          além de consórcios, soluções financeiras diversas, saúde ocupacional e muito mais. Nossa equipe está pronta
-          para atendê-lo e garantir a sua tranquilidade e segurança em todas as áreas da sua vida.
+          Conheça todas as soluções que temos disponíveis em nosso site...
         </motion.p>
 
-          <div className="max-w-7xl mx-auto px-4 md:px-6">
-          {/* Large cards */}
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          {/* Large */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             {SOLUTIONS.large.map((item, i) => (
-              <SolutionCard key={i} item={item} index={i} size="large" />
+              <SolutionCard
+                key={i}
+                item={item}
+                index={i}
+                size="large"
+              />
             ))}
           </div>
 
-          {/* Medium cards */}
+          {/* Medium */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             {SOLUTIONS.medium.map((item, i) => (
-              <SolutionCard key={i} item={item} index={i} size="medium" delay={0.16} />
+              <SolutionCard
+                key={i}
+                item={item}
+                index={i}
+                size="medium"
+                delay={0.16}
+              />
             ))}
           </div>
 
-          {/* Small cards */}
+          {/* Small */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {SOLUTIONS.small.slice(0, 4).map((item, i) => (
-              <SolutionCard key={i} item={item} index={i} size="small" delay={0.4} />
+              <SolutionCard
+                key={i}
+                item={item}
+                index={i}
+                size="small"
+                delay={0.4}
+              />
             ))}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             {SOLUTIONS.small.slice(4).map((item, i) => (
-              <SolutionCard key={i} item={item} index={i} size="small" delay={0.72} />
+              <SolutionCard
+                key={i}
+                item={item}
+                index={i}
+                size="small"
+                delay={0.72}
+              />
             ))}
           </div>
         </div>
       </section>
+
 
       {/* FLOATING BUTTONS */}
       <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 flex flex-col items-end gap-4 md:gap-5 z-50">
@@ -714,14 +767,14 @@ export default function Page() {
       </div>
 
       {/* HOW TO CONTRACT */}
-      <section className="py-24 bg-gradient-to-b from-white to-zinc-50 text-center">
+      <section id="sobre" className="py-24 bg-linear-to-b from-white to-zinc-50 text-center">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-6xl font-bold mb-20 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-bold mb-20 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
           >
             Como contratar seguros conosco
           </motion.h2>
@@ -776,7 +829,7 @@ export default function Page() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-5xl md:text-6xl font-bold mb-16 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+          className="text-5xl md:text-6xl font-bold mb-16 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
         >
           Por que contratar seguros através da nossa corretora?
         </motion.h2>
@@ -795,7 +848,7 @@ export default function Page() {
               <motion.div
                 whileHover={{ rotate: 8, scale: 1.15 }}
                 transition={{ type: "spring", stiffness: 250 }}
-                className={`p-6 bg-gradient-to-br ${item.gradient} rounded-3xl shadow-lg hover:shadow-xl transition`}
+                className={`p-6 bg-linear-to-br ${item.gradient} rounded-3xl shadow-lg hover:shadow-xl transition`}
               >
                 <item.icon className="w-10 h-10 text-white" strokeWidth={2} />
               </motion.div>
@@ -814,7 +867,7 @@ export default function Page() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-r from-[#0c5461] to-[#07333b] text-center text-white">
+      <section className="py-24 bg-linear-to-r from-[#0c5461] to-[#07333b] text-center text-white">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
           Pronto para proteger seu futuro?
         </h2>
@@ -826,14 +879,14 @@ export default function Page() {
           href="https://wa.me/5592981813103"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-10 bg-gradient-to-r from-[#7cdbde] to-blue-500 hover:from-[#5bc9cd] hover:to-blue-600 transition px-12 py-5 rounded-xl text-lg md:text-xl font-bold shadow-2xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#7cdbde]/40"
+          className="inline-block mt-10 bg-linear-to-r from-[#7cdbde] to-blue-500 hover:from-[#5bc9cd] hover:to-blue-600 transition px-12 py-5 rounded-xl text-lg md:text-xl font-bold shadow-2xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#7cdbde]/40"
         >
           Solicitar Cotação
         </a>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#07333b] text-zinc-300 pt-20 pb-10">
+      <footer id="contato" className="bg-[#07333b] text-zinc-300 pt-20 pb-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-3 gap-16 border-b border-zinc-700 pb-16">
             <div>
@@ -849,7 +902,7 @@ export default function Page() {
               </ul>
             </div>
 
-                <div>
+            <div>
               <h3 className="text-white text-lg font-bold mb-6">Redes Sociais</h3>
               <div className="flex flex-wrap gap-4">
                 <a
@@ -863,7 +916,7 @@ export default function Page() {
                 </a>
                 <a
                   href="#"
-                  className="p-4 bg-gradient-to-r from-pink-500 to-orange-400 hover:opacity-90 transition rounded-xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-300"
+                  className="p-4 bg-linear-to-r from-pink-500 to-orange-400 hover:opacity-90 transition rounded-xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-300"
                   aria-label="Instagram"
                 >
                   <FaInstagram className="w-6 h-6 text-white" />
