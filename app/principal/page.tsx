@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
-
 import {
   FaWhatsapp,
   FaInstagram,
@@ -47,8 +46,6 @@ interface SocialLinkItem {
   color: string;
   hoverColor: string;
 }
-
-
 
 interface HighlightItem {
   title: string;
@@ -119,6 +116,7 @@ const HIGHLIGHTS: HighlightItem[] = [
   },
 ];
 
+// ✅ FIXED: Single SOLUTIONS constant with all three groups
 const SOLUTIONS: {
   large: SolutionItem[];
   medium: SolutionItem[];
@@ -280,7 +278,6 @@ interface SocialLinkProps {
 }
 
 interface SolutionCardProps {
-  hraf?: string;
   item: SolutionItem;
   index: number;
   size?: "large" | "medium" | "small";
@@ -300,16 +297,16 @@ const SocialLink = ({ Icon, href, color, hoverColor }: SocialLinkProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const hoverBgClass = {
-    green: 'hover:bg-green-500/20',
-    pink: 'hover:bg-pink-500/20',
-    blue: 'hover:bg-blue-600/20',
-  }[color] || 'hover:bg-gray-500/20';
+    green: "hover:bg-green-500/20",
+    pink: "hover:bg-pink-500/20",
+    blue: "hover:bg-blue-600/20",
+  }[color] || "hover:bg-gray-500/20";
 
   const hoverTextClass = {
-    green: 'group-hover:text-green-400',
-    pink: 'group-hover:text-pink-400',
-    blue: 'group-hover:text-blue-400',
-  }[color] || 'group-hover:text-gray-400';
+    green: "group-hover:text-green-400",
+    pink: "group-hover:text-pink-400",
+    blue: "group-hover:text-blue-400",
+  }[color] || "group-hover:text-gray-400";
 
   return (
     <a
@@ -322,8 +319,8 @@ const SocialLink = ({ Icon, href, color, hoverColor }: SocialLinkProps) => {
       <Icon
         className={`h-6 w-6 transition-all duration-300 text-white ${hoverTextClass}`}
         style={{
-          filter: isHovered ? `drop-shadow(0 0 8px ${hoverColor})` : 'none',
-          transition: 'all 0.3s',
+          filter: isHovered ? `drop-shadow(0 0 8px ${hoverColor})` : "none",
+          transition: "all 0.3s",
         }}
       />
     </a>
@@ -346,14 +343,14 @@ const SolutionCard = ({ item, index, size = "medium", delay = 0 }: SolutionCardP
       transition={{ duration: 0.5, delay: delay + index * 0.08 }}
       viewport={{ once: true }}
       whileHover={{ y: -10, scale: size === "large" ? 1.02 : 1.03 }}
-      className={`group bg-white border border-zinc-200 rounded-3xl ${classes.container} shadow-lg hover:shadow-2xl transition-all duration-300`}
+      className={`group bg-white border border-zinc-200 rounded-3xl ${classes.container} shadow-lg hover:shadow-2xl transition-all duration-300 h-full`}
     >
       <motion.div
         className="flex justify-center mb-6"
         whileHover={{ rotate: 6, scale: 1.1 }}
         transition={{ type: "spring", stiffness: 200 }}
       >
-        <div className={`p-5 bg-linear-to-br ${item.gradient} rounded-2xl shadow-md`}>
+        <div className={`p-5 bg-gradient-to-br ${item.gradient} rounded-2xl shadow-md`}>
           <item.icon className={`${classes.icon} text-white`} strokeWidth={2} />
         </div>
       </motion.div>
@@ -362,15 +359,13 @@ const SolutionCard = ({ item, index, size = "medium", delay = 0 }: SolutionCardP
         {item.title}
       </h3>
 
-      <p className={`${classes.desc} text-zinc-600`}>
-        {item.desc}
-      </p>
+      <p className={`${classes.desc} text-zinc-600`}>{item.desc}</p>
     </motion.div>
   );
 
   if (item.href) {
     return (
-      <Link href={item.href} className="block cursor-pointer">
+      <Link href={item.href} className="block cursor-pointer h-full">
         {CardContent}
       </Link>
     );
@@ -379,7 +374,6 @@ const SolutionCard = ({ item, index, size = "medium", delay = 0 }: SolutionCardP
   return CardContent;
 };
 
-
 const FloatingButton = ({ href, icon, label, bgColor, delay }: FloatingButtonProps) => (
   <motion.div
     initial={{ opacity: 0, scale: 0 }}
@@ -387,7 +381,7 @@ const FloatingButton = ({ href, icon, label, bgColor, delay }: FloatingButtonPro
     transition={{ type: "spring", stiffness: 200, delay }}
     className="relative group"
   >
-    <span className="absolute right-4 md:right-20 top-1/2 -translate-y-1/2 bg-black text-white text-base md:text-lg px-3 py-1 md:px-4 md:py-2 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap shadow-lg">
+    <span className="absolute right-24 top-1/2 -translate-y-1/2 bg-black text-white text-base px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap shadow-lg">
       {label}
     </span>
 
@@ -397,7 +391,7 @@ const FloatingButton = ({ href, icon, label, bgColor, delay }: FloatingButtonPro
       rel="noopener noreferrer"
       whileHover={{ scale: 1.15 }}
       whileTap={{ scale: 0.95 }}
-      className={`relative w-20 h-20 flex items-center justify-center rounded-full ${bgColor} shadow-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white`}
+      className={`relative w-16 h-16 flex items-center justify-center rounded-full ${bgColor} shadow-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white`}
       aria-label={label}
     >
       {bgColor.includes("green") && (
@@ -426,7 +420,6 @@ export default function Page() {
     return () => clearInterval(interval);
   }, []);
 
-  // prevent background scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       const prev = document.body.style.overflow;
@@ -438,10 +431,8 @@ export default function Page() {
     return;
   }, [mobileMenuOpen]);
 
-  // move focus into mobile menu when opened
   useEffect(() => {
     if (mobileMenuOpen) {
-      // focus close button first for screen readers
       if (closeMenuButtonRef.current) {
         closeMenuButtonRef.current.focus();
       } else if (firstMobileLinkRef.current) {
@@ -456,7 +447,7 @@ export default function Page() {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="white"
-        className="w-8 h-8 z-10"
+        className="w-7 h-7 z-10"
       >
         <path d="M20.52 3.48A11.91 11.91 0 0012.05 0C5.4 0 .05 5.35.05 12c0 2.11.55 4.18 1.6 6L0 24l6.17-1.62A11.93 11.93 0 0012.05 24c6.65 0 12-5.35 12-12 0-3.2-1.25-6.21-3.53-8.52z" />
       </svg>
@@ -470,7 +461,7 @@ export default function Page() {
         xmlns="http://www.w3.org/2000/svg"
         fill="white"
         viewBox="0 0 24 24"
-        className="w-7 h-7 z-10"
+        className="w-6 h-6 z-10"
       >
         <path d="M6.62 10.79a15.07 15.07 0 006.59 6.59l2.2-2.2a1 1 0 011-.24 11.36 11.36 0 003.55.57 1 1 0 011 1V21a1 1 0 01-1 1C10.3 22 2 13.7 2 3a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.55 1 1 0 01-.24 1l-2.21 2.24z" />
       </svg>
@@ -480,15 +471,18 @@ export default function Page() {
 
   return (
     <main id="main-content" className="bg-zinc-100 text-zinc-800 text-base md:text-xl lg:text-2xl">
-      {/* Skip link for keyboard users */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-black focus:px-4 focus:py-2 rounded z-50">Ir para o conteúdo</a>
+      {/* Skip link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-black focus:px-4 focus:py-2 rounded z-50"
+      >
+        Ir para o conteúdo
+      </a>
 
       {/* HEADER */}
-     <header className="bg-[#051c21] text-white sticky top-0 z-50 shadow-md">
+      <header className="bg-[#051c21] text-white sticky top-0 z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="font-bold text-2xl tracking-wide">
-            HB Seguros
-          </div>
+          <div className="font-bold text-2xl tracking-wide">HB Seguros</div>
 
           <nav className="hidden md:flex items-center gap-6 text-lg md:text-xl font-medium text-white">
             {NAV_LINKS.map((link) => (
@@ -569,7 +563,7 @@ export default function Page() {
       </AnimatePresence>
 
       {/* HERO */}
-      <section id="inicio" className="relative h-130 md:h-150 overflow-hidden">
+      <section id="inicio" className="relative h-[32rem] md:h-[38rem] overflow-hidden">
         <AnimatePresence mode="wait">
           {HERO_IMAGES.map((img, index) =>
             index === currentHeroImage ? (
@@ -594,7 +588,7 @@ export default function Page() {
           )}
         </AnimatePresence>
 
-        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/60 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -656,7 +650,7 @@ export default function Page() {
                   />
                 </motion.div>
 
-                <div className="absolute inset-0 bg-linear-to-t from-black/80 to-black/40 group-hover:from-black/90 group-hover:to-black/50 transition" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40 group-hover:from-black/90 group-hover:to-black/50 transition" />
 
                 <div className="absolute inset-0 flex items-center justify-center">
                   <h3 className="text-white text-2xl md:text-3xl font-bold tracking-wide drop-shadow-lg">
@@ -672,14 +666,14 @@ export default function Page() {
       {/* SOLUTIONS */}
       <section
         id="solucoes"
-        className="py-24 text-center bg-linear-to-b from-zinc-50 to-white"
+        className="py-24 text-center bg-gradient-to-b from-zinc-50 to-white"
       >
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+          className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
         >
           Conheça nossas soluções
         </motion.h2>
@@ -689,64 +683,60 @@ export default function Page() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto text-gray-600 mb-12 px-4 md:px-6 text-base md:text-xl lg:text-2xl leading-relaxed"
+          className="max-w-3xl mx-auto text-gray-600 mb-12 px-4 md:px-6 text-base md:text-xl leading-relaxed"
         >
           Conheça todas as soluções que temos disponíveis em nosso site...
         </motion.p>
 
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          {/* Large */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 space-y-6">
+
+          {/* ── ROW 1: Large (2 cards) ── */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {SOLUTIONS.large.map((item, i) => (
-              <SolutionCard
-                key={i}
-                item={item}
-                index={i}
-                size="large"
-              />
+              <SolutionCard key={i} item={item} index={i} size="large" />
             ))}
           </div>
 
-          {/* Medium */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+          {/* ── ROW 2: Medium (3 cards) ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {SOLUTIONS.medium.map((item, i) => (
-              <SolutionCard
-                key={i}
-                item={item}
-                index={i}
-                size="medium"
-                delay={0.16}
-              />
+              <SolutionCard key={i} item={item} index={i} size="medium" delay={0.16} />
             ))}
           </div>
 
-          {/* Small */}
+          {/* ── TÍTULO: Outras Soluções ── */}
+          <div className="pt-8 pb-2 text-left">
+            <motion.h3
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-3xl font-bold text-zinc-700 flex items-center gap-3"
+            >
+              <span className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-full inline-block " />
+              Outras Soluções
+            </motion.h3>
+            <p className="text-zinc-500 text-base md:text-lg mt-2 ml-7">
+              Proteção completa para cada detalhe da sua vida e negócio.
+            </p>
+          </div>
+
+          {/* ── ROW 3: Small — primeiros 4 ── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {SOLUTIONS.small.slice(0, 4).map((item, i) => (
-              <SolutionCard
-                key={i}
-                item={item}
-                index={i}
-                size="small"
-                delay={0.4}
-              />
+              <SolutionCard key={i} item={item} index={i} size="small" delay={0.4} />
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+          {/* ── ROW 4: Small — restantes (3 cards) centralizados ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:max-w-3xl lg:mx-auto">
             {SOLUTIONS.small.slice(4).map((item, i) => (
-              <SolutionCard
-                key={i}
-                item={item}
-                index={i}
-                size="small"
-                delay={0.72}
-              />
+              <SolutionCard key={i} item={item} index={i} size="small" delay={0.56} />
             ))}
           </div>
+
         </div>
       </section>
-
 
       {/* FLOATING BUTTONS */}
       <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 flex flex-col items-end gap-4 md:gap-5 z-50">
@@ -767,14 +757,14 @@ export default function Page() {
       </div>
 
       {/* HOW TO CONTRACT */}
-      <section id="sobre" className="py-24 bg-linear-to-b from-white to-zinc-50 text-center">
+      <section id="sobre" className="py-24 bg-gradient-to-b from-white to-zinc-50 text-center">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-6xl font-bold mb-20 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+            className="text-4xl md:text-5xl font-bold mb-20 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
           >
             Como contratar seguros conosco
           </motion.h2>
@@ -798,9 +788,7 @@ export default function Page() {
                   {item.number}
                 </motion.div>
 
-                <h3 className="text-lg font-bold text-[#051c21] mb-3">
-                  {item.title}
-                </h3>
+                <h3 className="text-lg font-bold text-[#051c21] mb-3">{item.title}</h3>
 
                 <p className="text-lg md:text-xl text-zinc-600 max-w-xs leading-relaxed">
                   {item.desc}
@@ -829,7 +817,7 @@ export default function Page() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-5xl md:text-6xl font-bold mb-16 bg-linear-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent"
+          className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent mt-6 max-w-2xl mx-auto"
         >
           Por que contratar seguros através da nossa corretora?
         </motion.h2>
@@ -848,7 +836,7 @@ export default function Page() {
               <motion.div
                 whileHover={{ rotate: 8, scale: 1.15 }}
                 transition={{ type: "spring", stiffness: 250 }}
-                className={`p-6 bg-linear-to-br ${item.gradient} rounded-3xl shadow-lg hover:shadow-xl transition`}
+                className={`p-6 bg-gradient-to-br ${item.gradient} rounded-3xl shadow-lg hover:shadow-xl transition`}
               >
                 <item.icon className="w-10 h-10 text-white" strokeWidth={2} />
               </motion.div>
@@ -867,11 +855,11 @@ export default function Page() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-linear-to-r from-[#0c5461] to-[#07333b] text-center text-white">
+      <section className="py-24 bg-gradient-to-r from-[#0c5461] to-[#07333b] text-center text-white">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
           Pronto para proteger seu futuro?
         </h2>
-        <p className="mt-6 text-zinc-300 text-lg md:text-xl max-w-2xl mx-auto">
+        <p className="mt-6 text-zinc-300 max-w-2xl mx-auto text-xl md:text-2xl leading-relaxed">
           Fale com um especialista e receba uma proposta personalizada.
         </p>
 
@@ -879,7 +867,7 @@ export default function Page() {
           href="https://wa.me/5592981813103"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block mt-10 bg-linear-to-r from-[#7cdbde] to-blue-500 hover:from-[#5bc9cd] hover:to-blue-600 transition px-12 py-5 rounded-xl text-lg md:text-xl font-bold shadow-2xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#7cdbde]/40"
+          className="inline-block mt-10 bg-gradient-to-r from-[#7cdbde] to-blue-500 hover:from-[#5bc9cd] hover:to-blue-600 transition px-12 py-5 rounded-xl text-lg md:text-xl font-bold shadow-2xl hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#7cdbde]/40"
         >
           Solicitar Cotação
         </a>
@@ -916,7 +904,7 @@ export default function Page() {
                 </a>
                 <a
                   href="#"
-                  className="p-4 bg-linear-to-r from-pink-500 to-orange-400 hover:opacity-90 transition rounded-xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-300"
+                  className="p-4 bg-gradient-to-r from-pink-500 to-orange-400 hover:opacity-90 transition rounded-xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-300"
                   aria-label="Instagram"
                 >
                   <FaInstagram className="w-6 h-6 text-white" />
@@ -953,7 +941,12 @@ export default function Page() {
                 <a href="#solucoes" className="hover:text-gray-400 transition">
                   Seguros e Produtos
                 </a>
-                <a href="https://wa.me/5592981813103" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition">
+                <a
+                  href="https://wa.me/5592981813103"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-gray-400 transition"
+                >
                   Atendimento
                 </a>
                 <a href="#contato" className="hover:text-gray-400 transition">
