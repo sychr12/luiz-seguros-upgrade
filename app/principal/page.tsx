@@ -132,6 +132,7 @@ const SOLUTIONS: {
     },
     {
       icon: Building2,
+      href: "/segurosempresas",
       title: "Para Empresas",
       desc: "Empresarial, Riscos e Vida.",
       gradient: "from-blue-500 to-purple-500",
@@ -140,18 +141,21 @@ const SOLUTIONS: {
   medium: [
     {
       icon: Users,
+      href: "/segurospessoas",
       title: "Para Pessoas",
       desc: "Acidentes, Vida e Previdência.",
       gradient: "from-orange-400 to-pink-500",
     },
     {
       icon: Stethoscope,
+      href: "/segurosaudeodontologico",
       title: "Saúde e Odontológico",
       desc: "Pessoa Física e Jurídica (PME).",
       gradient: "from-green-400 to-emerald-500",
     },
     {
       icon: KeyRound,
+      href: "/consorcios",
       title: "Consórcios",
       desc: "Veículos, Imóveis e Viagem.",
       gradient: "from-teal-400 to-cyan-500",
@@ -160,30 +164,35 @@ const SOLUTIONS: {
   small: [
     {
       icon: DollarSign,
+      href: "/financiamentosecreditos",
       title: "Soluções Financeiras",
       desc: "Crédito e Financiamentos.",
       gradient: "from-yellow-400 to-orange-500",
     },
     {
       icon: Check,
+      href: "/segurogarantia",
       title: "Garantia e Fiança",
       desc: "Aluguel, Licitação e Contratos.",
       gradient: "from-purple-400 to-pink-500",
     },
     {
       icon: Gavel,
+      href: "/seguroresponsabilidade",
       title: "Responsabilidade",
       desc: "Profissional e Empresarial.",
       gradient: "from-indigo-400 to-blue-500",
     },
     {
       icon: Truck,
+      href: "/segurosparatransportes",
       title: "Transporte de Carga",
       desc: "Embarcador e Transportador.",
       gradient: "from-red-400 to-orange-500",
     },
     {
       icon: Bike,
+      href: "/segurobike",
       title: "Bicicleta",
       desc: "Danos, Subtração e Terceiros.",
       gradient: "from-lime-400 to-green-500",
@@ -350,7 +359,7 @@ const SolutionCard = ({ item, index, size = "medium", delay = 0 }: SolutionCardP
         whileHover={{ rotate: 6, scale: 1.1 }}
         transition={{ type: "spring", stiffness: 200 }}
       >
-        <div className={`p-5 bg-gradient-to-br ${item.gradient} rounded-2xl shadow-md`}>
+        <div className={`p-5 bg-gradient-to-br ${item.gradient} rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
           <item.icon className={`${classes.icon} text-white`} strokeWidth={2} />
         </div>
       </motion.div>
@@ -470,7 +479,7 @@ export default function Page() {
   );
 
   return (
-    <main id="main-content" className="bg-zinc-100 text-zinc-800 text-base md:text-xl lg:text-2xl">
+    <main id="main-content" className="bg-zinc-100 text-zinc-800">
       {/* Skip link */}
       <a
         href="#main-content"
@@ -588,7 +597,7 @@ export default function Page() {
           )}
         </AnimatePresence>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-[#051c21]/80 backdrop-blur-[2px]" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -705,21 +714,19 @@ export default function Page() {
           </div>
 
           {/* ── TÍTULO: Outras Soluções ── */}
-          <div className="pt-8 pb-2 text-left">
-            <motion.h3
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-2xl md:text-3xl font-bold text-zinc-700 flex items-center gap-3"
-            >
-              <span className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-full inline-block " />
-              Outras Soluções
-            </motion.h3>
-            <p className="text-zinc-500 text-base md:text-lg mt-2 ml-7">
-              Proteção completa para cada detalhe da sua vida e negócio.
-            </p>
-          </div>
+            <div className="pt-16 pb-6 text-center">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></span>
+                <h3 className="text-3xl md:text-4xl font-bold text-zinc-800 tracking-tight">
+                  Outras Soluções
+                </h3>
+                <span className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"></span>
+              </div>
+
+              <p className="text-zinc-500 text-lg md:text-xl max-w-2xl mx-auto">
+                Proteção completa para cada detalhe da sua vida e negócio.
+              </p>
+            </div>
 
           {/* ── ROW 3: Small — primeiros 4 ── */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -817,7 +824,7 @@ export default function Page() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent mt-6 max-w-2xl mx-auto"
+          className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent mt-6 max-w-2xl mx-auto "
         >
           Por que contratar seguros através da nossa corretora?
         </motion.h2>
