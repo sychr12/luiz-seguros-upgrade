@@ -248,13 +248,13 @@ export default function Page() {
       id="main-content"
       className="bg-zinc-100 text-zinc-800 text-base md:text-xl lg:text-2xl"
     >
-      {/* Skip link for keyboard users */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-black focus:px-4 focus:py-2 rounded z-50"
       >
         Ir para o conteúdo
       </a>
+
       {/* HEADER */}
       <header className="bg-[#051c21] text-white sticky top-0 z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -289,6 +289,7 @@ export default function Page() {
           </button>
         </div>
       </header>
+
       {/* MOBILE NAV */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -336,6 +337,7 @@ export default function Page() {
           </motion.nav>
         )}
       </AnimatePresence>
+
       {/* HERO */}
       <section id="inicio" className="relative h-130 md:h-150 overflow-hidden">
         <AnimatePresence mode="wait">
@@ -351,7 +353,7 @@ export default function Page() {
               >
                 <Image
                   src={img}
-                  alt="HB Seguros"
+                  alt="HB Seguros Transportes"
                   fill
                   priority={index === 0}
                   className="object-cover"
@@ -396,67 +398,82 @@ export default function Page() {
           </div>
         </motion.div>
       </section>
-      {/* esse aqui e (Seguros e Produtos)  */}
+
+      
+
       {/* PRODUTOS */}
-      <section id="produtos" className="py-24">
+      <section id="solucoes" className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-16 text-center">
-            Seguros e Produtos
+            Seguros para Imoves
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {PRODUCTS.map((item) => {
-              const isOpen = openCard === item.title;
-
-              return (
-                <motion.div
-                  key={item.title}
-                  layout
-                  onClick={() => setOpenCard(isOpen ? null : item.title)}
-                  className="cursor-pointer bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-zinc-200"
-                >
-                  <div className="flex justify-between items-start">
-                    <div
-                      className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-linear-to-br ${item.gradient} mb-6`}
-                    >
-                      <item.icon
-                        className="w-6 h-6 text-white"
-                        strokeWidth={2}
-                      />
+                    <div className="grid md:grid-cols-3 gap-8">
+                      {PRODUCTS.map((item) => {
+                        const isOpen = openCard === item.title;
+          
+                        return (
+                          <motion.div
+                            key={item.title}
+                            layout
+                            onClick={() => setOpenCard(isOpen ? null : item.title)}
+                            className="cursor-pointer bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-zinc-200"
+                          >
+                            <div className="flex justify-between items-start">
+                              <div
+                                className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-linear-to-br ${item.gradient} mb-6`}
+                              >
+                                <item.icon
+                                  className="w-6 h-6 text-white"
+                                  strokeWidth={2}
+                                />
+                              </div>
+          
+                              <motion.div
+                                animate={{ rotate: isOpen ? 180 : 0 }}
+                                transition={{ duration: 0.3 }}
+                              >
+                                <ChevronDown className="w-5 h-5 text-zinc-500" />
+                              </motion.div>
+                            </div>
+          
+                            <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+          
+                            <p className="text-zinc-600 text-sm">{item.shortDesc}</p>
+                            
+                            <AnimatePresence>
+                              {isOpen && (
+                                <motion.div
+                                  initial={{ opacity: 0, height: 0 }}
+                                  animate={{ opacity: 1, height: "auto" }}
+                                  exit={{ opacity: 0, height: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                  className="text-zinc-700 text-sm mt-4 overflow-hidden"
+                                >
+                                  <p className="mb-4">{item.fullDesc}</p>
+          
+                                  <div className="mt-2">
+                                    <a
+                                      href="https://wa.me/5592981813103"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onClick={(e) => e.stopPropagation()}
+                                      className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                                    >
+                                      Fale Conosco
+                                    </a>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </motion.div>
+                        );
+                      })}
                     </div>
-
-                    <motion.div
-                      animate={{ rotate: isOpen ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ChevronDown className="w-5 h-5 text-zinc-500" />
-                    </motion.div>
                   </div>
+                </section>
 
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-
-                  <p className="text-zinc-600 text-sm">{item.shortDesc}</p>
-
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.p
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="text-zinc-700 text-sm mt-4"
-                      >
-                        {item.fullDesc}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-      {/* esse aqui e (Como contratar seguros conosco)  */}
+      {/* COMO CONTRATAR */}
       <section
         id="sobre"
         className="py-24 bg-linear-to-b from-white to-zinc-50 text-center"
@@ -499,6 +516,7 @@ export default function Page() {
                   {item.desc}
                 </p>
 
+
                 {item.link && (
                   <a
                     href="https://wa.me/5592981813103"
@@ -515,7 +533,6 @@ export default function Page() {
         </div>
       </section>
 
-      
       {/* FOOTER */}
       <footer id="contato" className="bg-[#07333b] text-zinc-300 pt-20 pb-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6">

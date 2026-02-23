@@ -56,7 +56,9 @@ interface SolutionItem {
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   title: string;
   desc: string;
+  label?: string;
   gradient: string;
+  category?: string;
   href?: string;
 }
 
@@ -116,7 +118,7 @@ const HIGHLIGHTS: HighlightItem[] = [
   },
 ];
 
-// ✅ FIXED: Single SOLUTIONS constant with all three groups
+
 const SOLUTIONS: {
   large: SolutionItem[];
   medium: SolutionItem[];
@@ -125,14 +127,15 @@ const SOLUTIONS: {
   large: [
     {
       icon: Car,
-      href: "/segurosdeveiculo",
+      href: "/segurosdeveiculo#solucoes", // apenas 1 href
       title: "Para Veículos",
       desc: "Carros, Motos, Van e Frota.",
-      gradient: "from-cyan-400 to-blue-500",
+      gradient: "from-orange-400 to-red-500",
+      category: "", // opcional, se quiser filtrar
     },
     {
       icon: Building2,
-      href: "/segurosempresas",
+      href: "/segurosempresas#solucoes",
       title: "Para Empresas",
       desc: "Empresarial, Riscos e Vida.",
       gradient: "from-blue-500 to-purple-500",
@@ -141,21 +144,21 @@ const SOLUTIONS: {
   medium: [
     {
       icon: Users,
-      href: "/segurospessoas",
+      href: "/segurospessoas#solucoes",
       title: "Para Pessoas",
       desc: "Acidentes, Vida e Previdência.",
       gradient: "from-orange-400 to-pink-500",
     },
     {
       icon: Stethoscope,
-      href: "/segurosaudeodontologico",
+      href: "/segurosaudeodontologico#solucoes",
       title: "Saúde e Odontológico",
       desc: "Pessoa Física e Jurídica (PME).",
       gradient: "from-green-400 to-emerald-500",
     },
     {
       icon: KeyRound,
-      href: "/consorcios",
+      href: "/consorcios#solucoes",
       title: "Consórcios",
       desc: "Veículos, Imóveis e Viagem.",
       gradient: "from-teal-400 to-cyan-500",
@@ -164,47 +167,49 @@ const SOLUTIONS: {
   small: [
     {
       icon: DollarSign,
-      href: "/financiamentosecreditos",
+      href: "/financiamentosecreditos#solucoes",
       title: "Soluções Financeiras",
       desc: "Crédito e Financiamentos.",
       gradient: "from-yellow-400 to-orange-500",
     },
     {
       icon: Check,
-      href: "/segurogarantia",
+      href: "/segurogarantia#solucoes",
       title: "Garantia e Fiança",
       desc: "Aluguel, Licitação e Contratos.",
       gradient: "from-purple-400 to-pink-500",
     },
     {
       icon: Gavel,
-      href: "/seguroresponsabilidade",
+      href: "/seguroresponsabilidade#solucoes",
       title: "Responsabilidade",
       desc: "Profissional e Empresarial.",
       gradient: "from-indigo-400 to-blue-500",
     },
     {
       icon: Truck,
-      href: "/segurosparatransportes",
+      href: "/segurosparatransportes#solucoes",
       title: "Transporte de Carga",
       desc: "Embarcador e Transportador.",
       gradient: "from-red-400 to-orange-500",
     },
     {
       icon: Bike,
-      href: "/segurobike",
+      href: "/segurobike#solucoes",
       title: "Bicicleta",
       desc: "Danos, Subtração e Terceiros.",
       gradient: "from-lime-400 to-green-500",
     },
     {
       icon: Plane,
+      href: "/seguroviagem#solucoes",
       title: "Viagem",
       desc: "Internacional e Nacional.",
       gradient: "from-sky-400 to-blue-500",
     },
     {
       icon: Home,
+      href: "/segurosimoveis#solucoes",
       title: "Imóveis",
       desc: "Construção, Condomínio e Imobiliária.",
       gradient: "from-emerald-400 to-teal-500",

@@ -402,18 +402,30 @@ export default function Page() {
                   <h3 className="text-xl font-bold mb-2">{item.title}</h3>
 
                   <p className="text-zinc-600 text-sm">{item.shortDesc}</p>
-
+                  
                   <AnimatePresence>
                     {isOpen && (
-                      <motion.p
+                      <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="text-zinc-700 text-sm mt-4"
+                        className="text-zinc-700 text-sm mt-4 overflow-hidden"
                       >
-                        {item.fullDesc}
-                      </motion.p>
+                        <p className="mb-4">{item.fullDesc}</p>
+
+                        <div className="mt-2">
+                          <a
+                            href="https://wa.me/5592981813103"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                          >
+                            Fale Conosco
+                          </a>
+                        </div>
+                      </motion.div>
                     )}
                   </AnimatePresence>
                 </motion.div>
@@ -465,6 +477,7 @@ export default function Page() {
                 <p className="text-lg md:text-xl text-zinc-600 max-w-xs leading-relaxed">
                   {item.desc}
                 </p>
+
 
                 {item.link && (
                   <a

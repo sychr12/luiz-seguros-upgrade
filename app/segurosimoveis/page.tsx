@@ -4,15 +4,13 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Bike,
-  ShieldAlert,
-  Users,
-  Zap,
-  Wrench,
-  HeartPulse,
+  Hammer,
+  Building,
+  Sun,
+  Home,
+  Shield,
   ChevronDown,
-  Umbrella,
-  Lock,
+  HardHat,
 } from "lucide-react";
 
 import {
@@ -36,7 +34,7 @@ interface ProductItem {
   shortDesc: string;
   fullDesc: string;
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
-  gradient: string;
+  gradient: string; // obrigatório
 }
 
 interface StepItem {
@@ -111,9 +109,9 @@ const SocialLink = ({ Icon, href, color, hoverColor }: SocialLinkProps) => {
 ========================= */
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80",
-  "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1600&q=80",
-  "https://images.unsplash.com/photo-1511994298241-608e28f14fde?w=1600&q=80",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80", // Casa moderna
+  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80", // Obra / Construção
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80", // Prédio / Condomínio
 ];
 
 const HERO_INTERVAL = 6000;
@@ -139,68 +137,53 @@ const SOCIAL_LINKS: SocialLinkItem[] = [
 
 const PRODUCTS: ProductItem[] = [
   {
-    title: "Cobertura Básica",
-    shortDesc: "Proteção essencial para sua bicicleta.",
+    title: "Seguro Construção",
+    shortDesc: "Proteção para obras e construções.",
     fullDesc:
-      "A cobertura básica do Seguro Bike garante proteção para os principais riscos: Roubo/furto total • Incêndio • Queda do objeto transportador. O seguro se destina a qualquer tipo de bicicleta: elétrica, urbana, de estrada, mountain bike e de triathlon.",
-    icon: Lock,
+      "O Seguro Construção garante proteção durante todas as fases da obra, cobrindo danos materiais causados por incêndio, desabamento, vendaval, roubo de materiais e erros de execução. Ideal para construtoras, empreiteiras e proprietários que desejam segurança financeira durante a execução do projeto.",
+    icon: Hammer,
+    gradient: "from-orange-500 to-amber-500",
+    
+  },
+  {
+    title: "Seguro Imobiliária",
+    shortDesc: "Proteção para imobiliárias e administradoras.",
+    fullDesc:
+      "O Seguro Imobiliária oferece cobertura para responsabilidade civil, danos ao imóvel administrado, além de proteção contra inadimplência (quando contratado com garantia locatícia). Garante mais segurança nas operações e tranquilidade para proprietários e inquilinos.",
+    icon: Building,
+    gradient: "from-blue-500 to-indigo-500",
+  },
+  {
+    title: "Seguro Painel Solar",
+    shortDesc: "Proteção para sistemas de energia solar.",
+    fullDesc:
+      "O Seguro Painel Solar cobre danos causados por eventos climáticos, curto-circuito, incêndio, roubo e falhas elétricas. Ideal para residências, empresas e propriedades rurais que desejam proteger seu investimento em energia fotovoltaica.",
+    icon: Sun,
+    gradient: "from-yellow-500 to-orange-500",
+  },
+  {
+    title: "Seguro para Condomínios",
+    shortDesc: "Proteção completa para condomínios residenciais e comerciais.",
+    fullDesc:
+      "O Seguro Condomínio é obrigatório por lei e cobre incêndio, explosão, danos elétricos, responsabilidade civil do síndico, além de áreas comuns como elevadores, portões e garagens. Garante proteção para o patrimônio coletivo e tranquilidade aos moradores.",
+    icon: Home,
     gradient: "from-emerald-500 to-teal-500",
   },
   {
-    title: "Acidentes Pessoais",
-    shortDesc: "Suporte médico se você se acidentar pedalando.",
+    title: "Seguro Residência",
+    shortDesc: "Proteção completa para sua casa.",
     fullDesc:
-      "Se você se envolver em um acidente enquanto estiver pedalando, o seguro oferece suporte completo para ajudá-lo a lidar com a situação. A assistência pode incluir desde serviços de reboque até suporte médico e hospitalar, cobrindo despesas com exames, medicamentos e internações hospitalares, dependendo do plano contratado.",
-    icon: HeartPulse,
-    gradient: "from-rose-500 to-pink-500",
+      "O Seguro Residência protege contra incêndio, roubo, danos elétricos, vendaval, impacto de veículos e responsabilidade civil familiar. Também pode incluir assistência 24h com chaveiro, encanador, eletricista e outros serviços emergenciais.",
+    icon: Shield,
+    gradient: "from-purple-500 to-pink-500",
   },
   {
-    title: "Responsabilidade Civil",
-    shortDesc: "Proteção para danos causados a terceiros.",
+    title: "Seguro Riscos de Engenharia",
+    shortDesc: "Cobertura para grandes projetos e obras complexas.",
     fullDesc:
-      "O Seguro Bike oferece cobertura para danos causados a terceiros. Se você se envolver em um acidente que cause danos a outra pessoa ou propriedade, o seguro ajuda a arcar com as despesas. Cobertura especialmente importante para ciclistas que pedalam em áreas urbanas ou locais movimentados, onde há maior risco de acidentes.",
-    icon: Users,
-    gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    title: "Cobertura para Acessórios",
-    shortDesc: "Proteção para equipamentos e acessórios da bike.",
-    fullDesc:
-      "Muitos ciclistas investem em acessórios como faróis, lanternas, computadores de bordo, entre outros, que podem ser caros e difíceis de substituir. Com o Seguro Bike é possível incluir a cobertura desses itens, garantindo que você possa pedalar com mais tranquilidade e segurança.",
-    icon: Wrench,
-    gradient: "from-violet-500 to-purple-500",
-  },
-  {
-    title: "Danos Elétricos e Colisão",
-    shortDesc: "Cobertura para danos estruturais e elétricos.",
-    fullDesc:
-      "Cobertura adicional para danos elétricos (especialmente importante para bikes elétricas), danos à bicicleta em caso de colisão ou capotagem, e danos causados por tentativa de roubo/furto. Proteção completa para os principais riscos do dia a dia do ciclista.",
-    icon: Zap,
-    gradient: "from-orange-500 to-amber-500",
-  },
-  {
-    title: "Eventos da Natureza",
-    shortDesc: "Proteção contra vendaval, granizo e alagamentos.",
-    fullDesc:
-      "Cobertura para danos à bicicleta causados por eventos da natureza, como vendaval, granizo, alagamento e outras intempéries. Pedale com tranquilidade sabendo que sua bike está protegida mesmo contra situações fora do seu controle.",
-    icon: Umbrella,
-    gradient: "from-sky-500 to-blue-600",
-  },
-  {
-    title: "Assistência 24h",
-    shortDesc: "Suporte completo a qualquer hora, em todo o Brasil.",
-    fullDesc:
-      "Assistência 24h em todo território nacional, incluindo: reboque da bicicleta, despesas extras com transporte público em caso de impossibilidade de uso da bike, e suporte especializado para resolver qualquer imprevisto. Pedale com total segurança sabendo que você nunca estará sozinho.",
-    icon: ShieldAlert,
-    gradient: "from-indigo-500 to-blue-500",
-  },
-  {
-    title: "Seguro Bike Completo",
-    shortDesc: "Todas as coberturas em um único plano.",
-    fullDesc:
-      "O plano completo reúne cobertura básica e todos os adicionais: roubo/furto total, incêndio, acidentes pessoais, responsabilidade civil, danos elétricos, acessórios e equipamentos, reboque, transporte público, assistência 24h, danos por colisão e eventos da natureza. A disponibilidade e o detalhamento das coberturas podem variar de acordo com o plano contratado e as condições específicas do seguro Bike.",
-    icon: Bike,
-    gradient: "from-teal-500 to-green-500",
+      "O Seguro Riscos de Engenharia oferece proteção ampla para obras de médio e grande porte, incluindo danos materiais, falhas de projeto, acidentes durante a execução e responsabilidade civil. Indicado para construtoras, incorporadoras e projetos industriais.",
+    icon: HardHat,
+    gradient: "from-zinc-600 to-slate-800",
   },
 ];
 
@@ -208,7 +191,7 @@ const STEPS: StepItem[] = [
   {
     number: "1",
     title: "Defina seu Seguro",
-    desc: "Estamos preparados para atender todos os ramos de seguro.",
+    desc: "Estamos preparados para atender todos os ramos de seguro de transporte.",
   },
   {
     number: "2",
@@ -357,7 +340,7 @@ export default function Page() {
               >
                 <Image
                   src={img}
-                  alt="HB Seguros Bike"
+                  alt="HB Seguros Transportes"
                   fill
                   priority={index === 0}
                   className="object-cover"
@@ -377,11 +360,11 @@ export default function Page() {
           className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4 md:px-6"
         >
           <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight mb-6">
-            Pedale com tranquilidade e segurança.
+            Sua carga protegida em qualquer modal de transporte.
           </h1>
           <p className="mt-4 text-zinc-200 max-w-2xl text-base md:text-2xl leading-relaxed">
-            O Seguro Bike protege sua bicicleta e você. Cobertura contra roubo,
-            acidentes e danos a terceiros para qualquer tipo de bicicleta.
+            Soluções de seguro para embarcadores e transportadores. Proteção
+            completa do ponto de origem ao destino final.
           </p>
 
           <div className="mt-10 flex gap-5 flex-wrap justify-center">
@@ -397,83 +380,85 @@ export default function Page() {
               href="#solucoes"
               className="bg-white/10 hover:bg-white/20 transition px-10 py-5 rounded-xl text-lg md:text-xl font-semibold border border-white/30 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
             >
-              Ver Coberturas
+              Conheça Seguros
             </a>
           </div>
         </motion.div>
       </section>
 
+      
+
       {/* PRODUTOS */}
       <section id="solucoes" className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-16 text-center">
-            Coberturas Seguro Bike
+            Seguros para Imoves
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {PRODUCTS.map((item) => {
-              const isOpen = openCard === item.title;
-
-              return (
-                <motion.div
-                  key={item.title}
-                  layout
-                  onClick={() => setOpenCard(isOpen ? null : item.title)}
-                  className="cursor-pointer bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-zinc-200"
-                >
-                  <div className="flex justify-between items-start">
-                    <div
-                      className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-linear-to-br ${item.gradient} mb-6`}
-                    >
-                      <item.icon
-                        className="w-6 h-6 text-white"
-                        strokeWidth={2}
-                      />
-                    </div>
-
-                    <motion.div
-                      animate={{ rotate: isOpen ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ChevronDown className="w-5 h-5 text-zinc-500" />
-                    </motion.div>
-                  </div>
-
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-
-                  <p className="text-zinc-600 text-sm">{item.shortDesc}</p>
-                  
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="text-zinc-700 text-sm mt-4 overflow-hidden"
-                      >
-                        <p className="mb-4">{item.fullDesc}</p>
-
-                        <div className="mt-2">
-                          <a
-                            href="https://wa.me/5592981813103"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
-                          >
-                            Fale Conosco
-                          </a>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                   <div className="grid md:grid-cols-3 gap-8">
+                     {PRODUCTS.map((item) => {
+                       const isOpen = openCard === item.title;
+         
+                       return (
+                         <motion.div
+                           key={item.title}
+                           layout
+                           onClick={() => setOpenCard(isOpen ? null : item.title)}
+                           className="cursor-pointer bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition border border-zinc-200"
+                         >
+                           <div className="flex justify-between items-start">
+                             <div
+                               className={`w-14 h-14 flex items-center justify-center rounded-2xl bg-linear-to-br ${item.gradient} mb-6`}
+                             >
+                               <item.icon
+                                 className="w-6 h-6 text-white"
+                                 strokeWidth={2}
+                               />
+                             </div>
+         
+                             <motion.div
+                               animate={{ rotate: isOpen ? 180 : 0 }}
+                               transition={{ duration: 0.3 }}
+                             >
+                               <ChevronDown className="w-5 h-5 text-zinc-500" />
+                             </motion.div>
+                           </div>
+         
+                           <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+         
+                           <p className="text-zinc-600 text-sm">{item.shortDesc}</p>
+                           
+                           <AnimatePresence>
+                             {isOpen && (
+                               <motion.div
+                                 initial={{ opacity: 0, height: 0 }}
+                                 animate={{ opacity: 1, height: "auto" }}
+                                 exit={{ opacity: 0, height: 0 }}
+                                 transition={{ duration: 0.3 }}
+                                 className="text-zinc-700 text-sm mt-4 overflow-hidden"
+                               >
+                                 <p className="mb-4">{item.fullDesc}</p>
+         
+                                 <div className="mt-2">
+                                   <a
+                                     href="https://wa.me/5592981813103"
+                                     target="_blank"
+                                     rel="noopener noreferrer"
+                                     onClick={(e) => e.stopPropagation()}
+                                     className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                                   >
+                                     Fale Conosco
+                                   </a>
+                                 </div>
+                               </motion.div>
+                             )}
+                           </AnimatePresence>
+                         </motion.div>
+                       );
+                     })}
+                   </div>
+                 </div>
+               </section>
 
       {/* COMO CONTRATAR */}
       <section
@@ -517,8 +502,6 @@ export default function Page() {
                 <p className="text-lg md:text-xl text-zinc-600 max-w-xs leading-relaxed">
                   {item.desc}
                 </p>
-
-
 
                 {item.link && (
                   <a

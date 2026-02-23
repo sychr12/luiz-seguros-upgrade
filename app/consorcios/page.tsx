@@ -445,6 +445,18 @@ export default function Page() {
 
                   <p className="text-zinc-600 text-sm">{item.shortDesc}</p>
 
+                  <div className="mt-6">
+                    <a
+                      href="https://wa.me/5592981813103"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                    >
+                      Fale Conosco
+                    </a>
+                  </div>
+
                   <AnimatePresence>
                     {isOpen && (
                       <motion.p
@@ -507,6 +519,18 @@ export default function Page() {
                 <p className="text-lg md:text-xl text-zinc-600 max-w-xs leading-relaxed">
                   {item.desc}
                 </p>
+
+                <div className="mt-4">
+                  <a
+                    href="https://wa.me/5592981813103"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                  >
+                    Fale Conosco
+                  </a>
+                </div>
 
                 {item.link && (
                   <a

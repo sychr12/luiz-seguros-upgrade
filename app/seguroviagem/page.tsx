@@ -4,15 +4,14 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Bike,
-  ShieldAlert,
-  Users,
-  Zap,
-  Wrench,
-  HeartPulse,
+  Package,
+  Truck,
+  Ship,
+  Plane,
   ChevronDown,
-  Umbrella,
-  Lock,
+  Container,
+  MapPin,
+  ShieldCheck,
 } from "lucide-react";
 
 import {
@@ -111,9 +110,9 @@ const SocialLink = ({ Icon, href, color, hoverColor }: SocialLinkProps) => {
 ========================= */
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80",
-  "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1600&q=80",
-  "https://images.unsplash.com/photo-1511994298241-608e28f14fde?w=1600&q=80",
+  "https://images.unsplash.com/photo-1502920917128-1aa500764b6c?w=1600&q=80", // Avião no céu (corrija)
+  "https://images.unsplash.com/photo-1493558103817-58b2924bce98?w=1600&q=80", // Mala no aeroporto (errado)
+  "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1600&q=80", // Asa do avião com vista aérea(Ate que vale)
 ];
 
 const HERO_INTERVAL = 6000;
@@ -139,68 +138,28 @@ const SOCIAL_LINKS: SocialLinkItem[] = [
 
 const PRODUCTS: ProductItem[] = [
   {
-    title: "Cobertura Básica",
-    shortDesc: "Proteção essencial para sua bicicleta.",
+    title: "Seguro Viagem",
+    shortDesc: "Proteção e assistência completa durante suas viagens.",
     fullDesc:
-      "A cobertura básica do Seguro Bike garante proteção para os principais riscos: Roubo/furto total • Incêndio • Queda do objeto transportador. O seguro se destina a qualquer tipo de bicicleta: elétrica, urbana, de estrada, mountain bike e de triathlon.",
-    icon: Lock,
-    gradient: "from-emerald-500 to-teal-500",
+      "O Seguro Viagem garante tranquilidade e segurança durante viagens nacionais e internacionais, oferecendo cobertura para situações imprevistas como emergências médicas e odontológicas, doenças preexistentes, cancelamento ou interrupção de viagem, extravio de bagagem, repatriação sanitária e funerária, assistência jurídica e indenização por morte acidental. Também cobre práticas esportivas e atividades de aventura, além de oferecer suporte para localização de bagagem e auxílio em emergências médicas, incluindo contato com familiares. Ideal para quem deseja viajar com proteção completa e evitar prejuízos inesperados.",
+    icon: Plane,
+    gradient: "from-orange-500 to-rose-500",
   },
   {
-    title: "Acidentes Pessoais",
-    shortDesc: "Suporte médico se você se acidentar pedalando.",
+    title: "Seguro para Embarcador",
+    shortDesc: "Proteção para quem envia mercadorias.",
     fullDesc:
-      "Se você se envolver em um acidente enquanto estiver pedalando, o seguro oferece suporte completo para ajudá-lo a lidar com a situação. A assistência pode incluir desde serviços de reboque até suporte médico e hospitalar, cobrindo despesas com exames, medicamentos e internações hospitalares, dependendo do plano contratado.",
-    icon: HeartPulse,
-    gradient: "from-rose-500 to-pink-500",
-  },
-  {
-    title: "Responsabilidade Civil",
-    shortDesc: "Proteção para danos causados a terceiros.",
-    fullDesc:
-      "O Seguro Bike oferece cobertura para danos causados a terceiros. Se você se envolver em um acidente que cause danos a outra pessoa ou propriedade, o seguro ajuda a arcar com as despesas. Cobertura especialmente importante para ciclistas que pedalam em áreas urbanas ou locais movimentados, onde há maior risco de acidentes.",
-    icon: Users,
+      "O Seguro para Embarcador protege o proprietário da carga durante o transporte de mercadorias, cobrindo perdas e danos causados por acidentes, roubos, avarias e outros imprevistos. Válido para transporte rodoviário, ferroviário, aéreo e marítimo, nacional ou internacional. Ideal para indústrias, importadoras, exportadoras e distribuidoras que precisam garantir a integridade de suas mercadorias do ponto de origem ao destino final.",
+    icon: Package,
     gradient: "from-blue-500 to-cyan-500",
   },
   {
-    title: "Cobertura para Acessórios",
-    shortDesc: "Proteção para equipamentos e acessórios da bike.",
+    title: "Seguro para Transportador",
+    shortDesc: "Proteção para quem transporta mercadorias de terceiros.",
     fullDesc:
-      "Muitos ciclistas investem em acessórios como faróis, lanternas, computadores de bordo, entre outros, que podem ser caros e difíceis de substituir. Com o Seguro Bike é possível incluir a cobertura desses itens, garantindo que você possa pedalar com mais tranquilidade e segurança.",
-    icon: Wrench,
-    gradient: "from-violet-500 to-purple-500",
-  },
-  {
-    title: "Danos Elétricos e Colisão",
-    shortDesc: "Cobertura para danos estruturais e elétricos.",
-    fullDesc:
-      "Cobertura adicional para danos elétricos (especialmente importante para bikes elétricas), danos à bicicleta em caso de colisão ou capotagem, e danos causados por tentativa de roubo/furto. Proteção completa para os principais riscos do dia a dia do ciclista.",
-    icon: Zap,
-    gradient: "from-orange-500 to-amber-500",
-  },
-  {
-    title: "Eventos da Natureza",
-    shortDesc: "Proteção contra vendaval, granizo e alagamentos.",
-    fullDesc:
-      "Cobertura para danos à bicicleta causados por eventos da natureza, como vendaval, granizo, alagamento e outras intempéries. Pedale com tranquilidade sabendo que sua bike está protegida mesmo contra situações fora do seu controle.",
-    icon: Umbrella,
-    gradient: "from-sky-500 to-blue-600",
-  },
-  {
-    title: "Assistência 24h",
-    shortDesc: "Suporte completo a qualquer hora, em todo o Brasil.",
-    fullDesc:
-      "Assistência 24h em todo território nacional, incluindo: reboque da bicicleta, despesas extras com transporte público em caso de impossibilidade de uso da bike, e suporte especializado para resolver qualquer imprevisto. Pedale com total segurança sabendo que você nunca estará sozinho.",
-    icon: ShieldAlert,
-    gradient: "from-indigo-500 to-blue-500",
-  },
-  {
-    title: "Seguro Bike Completo",
-    shortDesc: "Todas as coberturas em um único plano.",
-    fullDesc:
-      "O plano completo reúne cobertura básica e todos os adicionais: roubo/furto total, incêndio, acidentes pessoais, responsabilidade civil, danos elétricos, acessórios e equipamentos, reboque, transporte público, assistência 24h, danos por colisão e eventos da natureza. A disponibilidade e o detalhamento das coberturas podem variar de acordo com o plano contratado e as condições específicas do seguro Bike.",
-    icon: Bike,
-    gradient: "from-teal-500 to-green-500",
+      "O Seguro para Transportador (RCTR-C e RCF-DC) protege a empresa transportadora contra sua responsabilidade civil pelas cargas que transporta por conta de terceiros. Cobre danos à carga decorrentes de acidentes, tombamentos, colisões, incêndios e roubos durante o transporte rodoviário. Obrigatório para transportadoras que operam com mercadorias de clientes e essencial para a segurança jurídica do negócio.",
+    icon: Truck,
+    gradient: "from-emerald-500 to-teal-500",
   },
 ];
 
@@ -208,7 +167,7 @@ const STEPS: StepItem[] = [
   {
     number: "1",
     title: "Defina seu Seguro",
-    desc: "Estamos preparados para atender todos os ramos de seguro.",
+    desc: "Estamos preparados para atender todos os ramos de seguro de transporte.",
   },
   {
     number: "2",
@@ -357,7 +316,7 @@ export default function Page() {
               >
                 <Image
                   src={img}
-                  alt="HB Seguros Bike"
+                  alt="HB Seguros Transportes"
                   fill
                   priority={index === 0}
                   className="object-cover"
@@ -376,13 +335,13 @@ export default function Page() {
           transition={{ duration: 1 }}
           className="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4 md:px-6"
         >
-          <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight mb-6">
-            Pedale com tranquilidade e segurança.
-          </h1>
-          <p className="mt-4 text-zinc-200 max-w-2xl text-base md:text-2xl leading-relaxed">
-            O Seguro Bike protege sua bicicleta e você. Cobertura contra roubo,
-            acidentes e danos a terceiros para qualquer tipo de bicicleta.
-          </p>
+        <h1 className="text-3xl md:text-6xl lg:text-7xl font-bold max-w-4xl leading-tight mb-6">
+          Viaje com tranquilidade e proteção em qualquer destino.
+        </h1>
+        <p className="mt-4 text-zinc-200 max-w-2xl text-base md:text-2xl leading-relaxed">
+          Seguro viagem com cobertura médica, assistência 24h, proteção para bagagem,
+          cancelamento de viagem e muito mais. Segurança completa do embarque ao retorno.
+        </p>
 
           <div className="mt-10 flex gap-5 flex-wrap justify-center">
             <a
@@ -397,7 +356,7 @@ export default function Page() {
               href="#solucoes"
               className="bg-white/10 hover:bg-white/20 transition px-10 py-5 rounded-xl text-lg md:text-xl font-semibold border border-white/30 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
             >
-              Ver Coberturas
+              Conheça Seguros
             </a>
           </div>
         </motion.div>
@@ -407,7 +366,7 @@ export default function Page() {
       <section id="solucoes" className="py-24">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold mb-16 text-center">
-            Coberturas Seguro Bike
+            Seguros para Transportes
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -442,30 +401,30 @@ export default function Page() {
                   <h3 className="text-xl font-bold mb-2">{item.title}</h3>
 
                   <p className="text-zinc-600 text-sm">{item.shortDesc}</p>
-                  
+
+                  <div className="mt-6">
+                    <a
+                      href="https://wa.me/5592981813103"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                    >
+                      Fale Conosco
+                    </a>
+                  </div>
+
                   <AnimatePresence>
                     {isOpen && (
-                      <motion.div
+                      <motion.p
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="text-zinc-700 text-sm mt-4 overflow-hidden"
+                        className="text-zinc-700 text-sm mt-4"
                       >
-                        <p className="mb-4">{item.fullDesc}</p>
-
-                        <div className="mt-2">
-                          <a
-                            href="https://wa.me/5592981813103"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
-                          >
-                            Fale Conosco
-                          </a>
-                        </div>
-                      </motion.div>
+                        {item.fullDesc}
+                      </motion.p>
                     )}
                   </AnimatePresence>
                 </motion.div>
@@ -518,7 +477,17 @@ export default function Page() {
                   {item.desc}
                 </p>
 
-
+                <div className="mt-4">
+                  <a
+                    href="https://wa.me/5592981813103"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-block bg-[#051c21]/70 hover:bg-[#051c21]/90 transition px-6 py-3 rounded-lg text-sm font-semibold text-white border border-white/20 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7cdbde]"
+                  >
+                    Fale Conosco
+                  </a>
+                </div>
 
                 {item.link && (
                   <a
